@@ -1,0 +1,34 @@
+// Prisma Schema - Student Grading System
+// Equivalent to init.php database structure
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int     @id @default(autoincrement())
+  militaryId String  @unique @map("military_id")
+  name       String
+  pin        String
+  role       String  // 'lecturer' or 'student'
+  grades     Grade?
+
+  @@map("users")
+}
+
+model Grade {
+  id        Int  @id @default(autoincrement())
+  studentId Int  @unique @map("student_id")
+  computer  Int?
+  english   Int?
+  culture   Int?
+  islamic   Int?
+  student   User @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@map("grades")
+}
