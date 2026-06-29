@@ -1,13 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // تجاهل أخطاء البناء (ضروري للنشر السريع)
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  output: "standalone",
+  /* config options here */
   typescript: {
     ignoreBuildErrors: true,
   },
+  reactStrictMode: false,
 };
 
 export default nextConfig;
